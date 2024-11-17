@@ -19,16 +19,11 @@ export async function signup(formData: any): Promise<any> {
     };
   }
 
-  try {
-    await createSession(
-      validatedFields.data.userName,
-      validatedFields.data.jobTitle
-    );
-  } catch {
-    return {
-      message: "Sorry something went wrong on our end",
-    };
-  }
+  await createSession(
+    validatedFields.data.userName,
+    validatedFields.data.jobTitle
+  );
+
   redirect("./information-page");
 }
 // update or delete the session

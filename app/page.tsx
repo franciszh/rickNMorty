@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { Heading, Image } from "@chakra-ui/react";
 import { InformationForm } from "@/app/ui/information-form";

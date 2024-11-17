@@ -4,6 +4,7 @@ import { useActionState } from "react";
 import { Field } from "@/components/ui/field";
 import { Input, Stack, Button } from "@chakra-ui/react";
 import { signup } from "@/app/actions/auth";
+import { Alert } from "@/components/ui/alert";
 
 export const InformationForm = () => {
   const [state, action] = useActionState(signup, {});
@@ -48,6 +49,7 @@ export const InformationForm = () => {
         >
           Submit
         </Button>
+        {state?.message && <Alert status="success" title={state.message} />}
       </Stack>
     </form>
   );
