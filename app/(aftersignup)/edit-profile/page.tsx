@@ -1,8 +1,18 @@
 import React from "react";
 import { Heading, Image } from "@chakra-ui/react";
 import { InformationForm } from "@/app/ui/information-form";
+import { getPayload } from "@/app/lib/sessions";
+import type { Metadata } from "next";
 
-const page = () => {
+export const metadata: Metadata = {
+  title: "Edit Profile",
+  description: "You can change your profile information on the page",
+};
+
+const page = async () => {
+  // get profile information from session
+  const payload = await getPayload();
+
   return (
     <div className="flex-center">
       <section className="information-container">
@@ -23,7 +33,10 @@ const page = () => {
             Look, everyone deserves a second chance, you might also want to
             erase yourself from this universe.
           </Heading>
-          <InformationForm />
+          <InformationForm
+            defaultJobTitle={payload?.jobTitle}
+            defaultUserName={payload?.userName}
+          />
         </div>
       </section>
     </div>

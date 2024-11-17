@@ -1,6 +1,11 @@
 import React from "react";
 import { Heading, Image } from "@chakra-ui/react";
 import { InformationForm } from "@/app/ui/information-form";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Can you let us know you at first?",
+};
 
 const page = () => {
   return (
