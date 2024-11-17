@@ -62,4 +62,16 @@ body {
     }
     @apply py-3 px-5 text-[var(--brown)] text-2xl;
   }
+  .information-pagination {
+    button {
+      @apply bg-[var(--skin)] border;
+    }
+    button:hover {
+      @apply bg-[var(--pink)];
+    }
+    button[data-selected] {
+      @apply bg-[var(--brown)];
+    }
+    @apply py-3;
+  }
 }
