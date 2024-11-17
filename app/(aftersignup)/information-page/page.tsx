@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { query } from "@/app/lib/ApolloClient";
 import { gql } from "@apollo/client";
 import { InformationGrid } from "@/app/ui/information-grid";
-import { Pagination } from "@/app/ui/pagination";
+import { Pagination } from "./pagination";
 import { Heading } from "@chakra-ui/react";
 
 export const metadata: Metadata = {
