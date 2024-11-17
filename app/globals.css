@@ -8,6 +8,8 @@
   --teal: #97ce4c;
   --brown: #44281d;
   --pink: #e89ac7;
+  --yellow: #f0e14a;
+  --skin: #e4a788;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -28,7 +30,7 @@ body {
     @apply flex items-center justify-center;
   }
   .information-container {
-    @apply min-w-[300px] max-w-[500px] w-full mt-[5%];
+    @apply min-w-[300px] max-w-[500px] w-full mt-[2%];
   }
   .input-container {
     @apply p-4 bg-[var(--pink)] shadow relative z-[2];
@@ -43,12 +45,21 @@ body {
     @apply text-[var(--brown)] text-4xl;
   }
   .information-image {
-    @apply w-[300px] h-[300px];
+    @apply h-[300px];
   }
   .information-image-container {
     @apply relative mb-[-40px] z-[1];
   }
   .information-button {
     @apply bg-[var(--teal)] text-[var(--brown)] mb-[20px];
+  }
+  .nav {
+    @apply bg-[var(--yellow)];
+  }
+  .nav-item {
+    &.active {
+      @apply bg-[var(--skin)];
+    }
+    @apply py-3 px-5 text-[var(--brown)] text-2xl;
   }
 }

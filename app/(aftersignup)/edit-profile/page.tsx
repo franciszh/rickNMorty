@@ -8,8 +8,8 @@ const page = () => {
       <section className="information-container">
         <div className="flex-center information-image-container">
           <Image
-            src="morty-headshot.png"
-            alt="morty headshot"
+            src="rick-headshot.png"
+            alt="rick headshot"
             className="information-image"
           />
         </div>
@@ -20,7 +20,8 @@ const page = () => {
             fontWeight="bold"
             className="information-heading"
           >
-            Rick told me not to talk with strangers!!!
+            Look, everyone deserves a second chance, you might also want to
+            erase yourself from this universe.
           </Heading>
           <InformationForm />
         </div>
