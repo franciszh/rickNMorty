@@ -5,6 +5,9 @@
 :root {
   --background: #ffffff;
   --foreground: #97ce4c;
+  --teal: #97ce4c;
+  --brown: #44281d;
+  --pink: #e89ac7;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -28,21 +31,24 @@ body {
     @apply min-w-[300px] max-w-[500px] w-full mt-[5%];
   }
   .input-container {
-    @apply p-4 bg-[#e89ac7] shadow relative z-[2];
+    @apply p-4 bg-[var(--pink)] shadow relative z-[2];
   }
   .input-field {
-    @apply placeholder:text-[#44281d] p-5;
+    @apply placeholder:text-[var(--brown)] p-5;
   }
   .input-wrapper > label {
-    @apply text-[#44281d] text-lg font-bold;
+    @apply text-[var(--brown)] text-lg font-bold;
   }
   .information-heading {
-    @apply text-[#44281d] text-4xl;
+    @apply text-[var(--brown)] text-4xl;
   }
   .information-image {
     @apply w-[300px] h-[300px];
   }
   .information-image-container {
     @apply relative mb-[-40px] z-[1];
+  }
+  .information-button {
+    @apply bg-[var(--teal)] text-[var(--brown)];
   }
 }

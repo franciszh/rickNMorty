@@ -5,6 +5,12 @@ import { SessionPayload } from '@/app/lib/definitions'
  
 const secretKey = process.env.SESSION_SECRET
 const encodedKey = new TextEncoder().encode(secretKey)
+
+/**
+ * The entire helper functions below
+ * come from the Next.js official documnent
+ * about Authentication
+ */
  
 export async function encrypt(payload: SessionPayload) {
   return new SignJWT(payload)
