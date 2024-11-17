@@ -1,8 +1,10 @@
 import React from "react";
-import { Heading, Image } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 import { InformationForm } from "@/app/ui/information-form";
 import { getPayload } from "@/app/lib/sessions";
 import type { Metadata } from "next";
+import Image from "next/image";
+import rickHead from "@/public/rick-headshot.png";
 
 export const metadata: Metadata = {
   title: "Edit Profile",
@@ -17,11 +19,7 @@ const page = async () => {
     <div className="flex-center">
       <section className="information-container">
         <div className="flex-center information-image-container">
-          <Image
-            src="rick-headshot.png"
-            alt="rick headshot"
-            className="information-image"
-          />
+          <Image src={rickHead} alt="rick headshot" height={300} width={300} />
         </div>
         <div className="input-container">
           <Heading

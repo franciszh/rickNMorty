@@ -7,8 +7,8 @@ import { signup, uplete } from "@/app/actions/auth";
 import { Alert } from "@/components/ui/alert";
 
 interface InformationFormProps {
-  defaultUserName?: string,
-  defaultJobTitle?: string,
+  defaultUserName?: string;
+  defaultJobTitle?: string;
 }
 
 export const InformationForm = (props: InformationFormProps) => {
@@ -52,6 +52,7 @@ export const InformationForm = (props: InformationFormProps) => {
             defaultValue={defaultJobTitle}
           />
         </Field>
+        {state?.message && <Alert status="success" title={state.message} />}
         <Button
           type="submit"
           size="md"
@@ -60,7 +61,6 @@ export const InformationForm = (props: InformationFormProps) => {
         >
           Submit
         </Button>
-        {state?.message && <Alert status="success" title={state.message} />}
       </Stack>
     </form>
   );

@@ -44,9 +44,6 @@ body {
   .information-heading {
     @apply text-[var(--brown)] text-4xl;
   }
-  .information-image {
-    @apply h-[300px];
-  }
   .information-image-container {
     @apply relative mb-[-40px] z-[1];
   }

@@ -4,6 +4,7 @@ import { query } from "@/app/lib/ApolloClient";
 import { gql } from "@apollo/client";
 import { InformationGrid } from "@/app/ui/information-grid";
 import { Pagination } from "@/app/ui/pagination";
+import { Heading } from "@chakra-ui/react";
 
 export const metadata: Metadata = {
   title: "Information Page",
@@ -53,8 +54,11 @@ const page = async (props: InformationPageProps) => {
   const { count } = characters.info;
   return (
     <section>
-      <Pagination count={count} pageSize={20} />
+      <Heading as="h1" size="4xl" className="information-heading ml-5 py-10">
+        Welcome to the family of Rick and Morty
+      </Heading>
       <InformationGrid charList={charList} />
+      <Pagination count={count} pageSize={20} />
     </section>
   );
 };

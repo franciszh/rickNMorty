@@ -1,4 +1,5 @@
-import { Box, Image, HStack, Badge, Text, Center } from "@chakra-ui/react";
+import { Box, HStack, Badge, Text, Center } from "@chakra-ui/react";
+import Image from "next/image";
 
 export interface InformationBoxProps {
   name: string;
@@ -13,7 +14,7 @@ export const InformationBox = (props: InformationBoxProps) => {
   return (
     <Center width="100%">
       <Box width="300px" borderWidth="1px">
-        <Image src={image} alt={name} />
+        <Image src={image} alt={name} width={300} height={300} />
         <Box backgroundColor="#e4a788" p="4" spaceY="2">
           <HStack gap="1">
             <Text>Name:</Text>

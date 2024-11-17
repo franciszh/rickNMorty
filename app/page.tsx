@@ -1,7 +1,9 @@
 import React from "react";
-import { Heading, Image } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 import { InformationForm } from "@/app/ui/information-form";
+import Image from "next/image";
 import type { Metadata } from "next";
+import mortyHead from "@/public/morty-headshot.png";
 
 export const metadata: Metadata = {
   title: "Can you let us know you at first?",
@@ -13,9 +15,10 @@ const page = () => {
       <section className="information-container">
         <div className="flex-center information-image-container">
           <Image
-            src="morty-headshot.png"
+            src={mortyHead}
             alt="morty headshot"
-            className="information-image"
+            height={300}
+            width={300}
           />
         </div>
         <div className="input-container">
