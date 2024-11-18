@@ -71,4 +71,16 @@ body {
     }
     @apply py-3;
   }
+  .information-modal-heading {
+    @apply text-[var(--brown)] text-3xl mb-5;
+  }
+  .information-modal-overlay {
+    @apply fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center;
+  }
+  .information-modal-container {
+    @apply p-8 border w-96 shadow-lg rounded-md bg-white;
+  }
+  .information-modal-button {
+    @apply bg-[var(--teal)] text-[var(--brown)] px-[20px];
+  }
 }

@@ -10,14 +10,6 @@ export const getCharacters = gql`
       results {
         id
         name
-        type
-        status
-        origin {
-          name
-        }
-        location {
-          name
-        }
         species
         gender
         image

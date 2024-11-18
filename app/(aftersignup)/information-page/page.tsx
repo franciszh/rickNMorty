@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { query } from "@/app/lib/ApolloClient";
 import { InformationGrid } from "@/app/ui/information-grid";
 import { getCharacters, getCharacter } from "@/app/lib/gql";
-import { Pagination } from "./pagination";
-import { InformationModal } from "./information-modal";
+import { Pagination } from "../../ui/pagination";
+import { InformationModal } from "../../ui/information-modal";
 import { Heading } from "@chakra-ui/react";
 
 export const metadata: Metadata = {
@@ -45,8 +45,7 @@ const page = async (props: InformationPageProps) => {
     if (charError) {
       throw new Error("fetch character failed");
     }
-    charData = data;
-    console.log(charData);
+    charData = data?.character;
   }
 
   // throw the error and let the closed error page to catch it
@@ -64,7 +63,7 @@ const page = async (props: InformationPageProps) => {
       </Heading>
       <InformationGrid charList={charList} />
       <Pagination count={count} pageSize={20} />
-      <InformationModal />
+      {charData && <InformationModal {...charData} />}
     </section>
   );
 };
