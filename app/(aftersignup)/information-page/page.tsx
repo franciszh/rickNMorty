@@ -1,9 +1,10 @@
 import React from "react";
 import type { Metadata } from "next";
 import { query } from "@/app/lib/ApolloClient";
-import { gql } from "@apollo/client";
 import { InformationGrid } from "@/app/ui/information-grid";
+import { getCharacters, getCharacter } from "@/app/lib/gql";
 import { Pagination } from "./pagination";
+import { InformationModal } from "./information-modal";
 import { Heading } from "@chakra-ui/react";
 
 export const metadata: Metadata = {
@@ -11,45 +12,49 @@ export const metadata: Metadata = {
   description: "You are viewing the amazing gallery of Rick and Morty",
 };
 
-const getCharacters = gql`
-  query getCharacters($currentPage: Int!) {
-    characters(page: $currentPage) {
-      info {
-        count
-        pages
-      }
-      results {
-        id
-        name
-        species
-        gender
-        image
-      }
-    }
-  }
-`;
+// This API is very unlikely to change
+export const revalidate = 3600;
 
 interface InformationPageProps {
   searchParams?: Promise<{
     page?: string;
+    charId?: string;
   }>;
 }
 
 const page = async (props: InformationPageProps) => {
   const searchParams = await props.searchParams;
   const currentPage = Number(searchParams?.page) || 1;
+  const charId = searchParams?.charId;
 
-  const { data, error } = await query({
+  // fetch the entire char list, it is a must to have for the page
+  const { data: charListData, error: charListError } = await query({
     query: getCharacters,
     variables: { currentPage },
   });
 
+  let charData = null;
+  // fetch one character if the charId is in url params
+  if (charId) {
+    const { data, error: charError } = await query({
+      query: getCharacter,
+      variables: { id: charId },
+    });
+
+    // throw the error and let the closed error page to catch it
+    if (charError) {
+      throw new Error("fetch character failed");
+    }
+    charData = data;
+    console.log(charData);
+  }
+
   // throw the error and let the closed error page to catch it
-  if (error) {
+  if (charListError) {
     throw new Error("fetch characters failed");
   }
 
-  const { characters } = data;
+  const { characters } = charListData;
   const charList = characters.results;
   const { count } = characters.info;
   return (
@@ -59,6 +64,7 @@ const page = async (props: InformationPageProps) => {
       </Heading>
       <InformationGrid charList={charList} />
       <Pagination count={count} pageSize={20} />
+      <InformationModal />
     </section>
   );
 };
