@@ -86,4 +86,7 @@ body {
   .information-modal-button {
     @apply bg-[var(--teal)] text-[var(--brown)] px-[20px];
   }
+  .error-heading {
+    @apply text-[var(--brown)] text-3xl mb-5;
+  }
 }

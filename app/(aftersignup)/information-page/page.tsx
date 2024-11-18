@@ -41,7 +41,6 @@ const page = async (props: InformationPageProps) => {
       variables: { id: charId },
     });
 
-    // throw the error and let the closed error page to catch it
     if (charError) {
       throw new Error("fetch character failed");
     }
@@ -49,7 +48,7 @@ const page = async (props: InformationPageProps) => {
   }
 
   // throw the error and let the closed error page to catch it
-  if (charListError) {
+  if (charListError || !charListData.characters?.info?.count) {
     throw new Error("fetch characters failed");
   }
 
