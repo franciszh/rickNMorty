@@ -1,12 +1,19 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { createSession, updateSession, deleteSession } from "@/app/lib/sessions";
-import { SignupFormSchema, FormState } from "@/app/lib/definitions";
+import {
+  createSession,
+  updateSession,
+  deleteSession,
+} from "@/app/lib/sessions";
+import {
+  SignupFormSchema,
+  UpleteFormSchema,
+  FormState,
+} from "@/app/lib/definitions";
 
 // create the session
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function signup(_: FormState, formData: any): Promise<any> {
+export async function signup(_: FormState, formData: FormData) {
   // simple non-null service end validation
   const validatedFields = SignupFormSchema.safeParse({
     userName: formData.get("userName"),
@@ -27,19 +34,22 @@ export async function signup(_: FormState, formData: any): Promise<any> {
   redirect("./information-page");
 }
 // update or delete the session
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function uplete(_: FormState, formData: any): Promise<any> {
-    const userName = formData.get("userName");
-    const jobTitle = formData.get("jobTitle");
-  
-    if (!userName || !jobTitle) {
-        await deleteSession();
-        redirect("/");
-    }
+export async function uplete(_: FormState, formData: FormData) {
+  // Empty strings are allowed to test session removal
+  const validatedFields = UpleteFormSchema.safeParse({
+    userName: formData.get("userName"),
+    jobTitle: formData.get("jobTitle"),
+  });
+  const { userName, jobTitle } = validatedFields.data!;
 
-    await updateSession(userName, jobTitle);
-
-    return {
-        message: "Well you've got a new identity in this world."
-    };
+  if (!userName || !jobTitle) {
+    await deleteSession();
+    redirect("/");
   }
+
+  await updateSession(userName, jobTitle);
+
+  return {
+    message: "Well you've got a new identity in this world.",
+  };
+}

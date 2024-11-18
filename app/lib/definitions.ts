@@ -12,6 +12,11 @@ export const SignupFormSchema = z.object({
   jobTitle: z.string({ required_error: "Job Title is required" }),
 });
 
+export const UpleteFormSchema = z.object({
+  userName: z.string(),
+  jobTitle: z.string(),
+});
+
 // The type of form state for the user profile form
 export type FormState = {
   errors?: {

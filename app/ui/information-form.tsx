@@ -5,6 +5,7 @@ import { Field } from "@/components/ui/field";
 import { Input, Stack, Button } from "@chakra-ui/react";
 import { signup, uplete } from "@/app/actions/auth";
 import { Alert } from "@/components/ui/alert";
+import { FormState } from "@/app/lib/definitions";
 
 interface InformationFormProps {
   defaultUserName?: string;
@@ -15,7 +16,10 @@ export const InformationForm = (props: InformationFormProps) => {
   const { defaultJobTitle, defaultUserName } = props;
   const isToEditInformationForm = !!(defaultJobTitle && defaultUserName);
   const formServerAction = isToEditInformationForm ? uplete : signup;
-  const [state, action] = useActionState(formServerAction, {});
+  const [state, action] = useActionState<FormState, FormData>(
+    formServerAction,
+    {}
+  );
 
   return (
     <form

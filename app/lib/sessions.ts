@@ -27,6 +27,7 @@ export async function decrypt(session: string | undefined = "") {
     return payload;
   } catch (error) {
     console.log("Failed to verify session", error);
+    return {};
   }
 }
 
@@ -71,6 +72,9 @@ export async function deleteSession() {
 // read the payload in order ot get the user name and job title
 export async function getPayload() {
   const session = (await cookies()).get("session")?.value;
+  if (!session) {
+    return null;
+  }
   const payload = await decrypt(session);
-  return payload as SessionPayload | undefined;
+  return payload as SessionPayload;
 }
