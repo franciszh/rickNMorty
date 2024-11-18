@@ -18,8 +18,21 @@ export const InformationForm = (props: InformationFormProps) => {
   const [state, action] = useActionState(formServerAction, {});
 
   return (
-    <form action={action}>
+    <form
+      action={action}
+      onSubmit={(e) => {
+        e.stopPropagation();
+      }}
+    >
       <Stack className="mt-10">
+        {state?.message && (
+          <Alert
+            role="alert"
+            aria-live="polite"
+            status="success"
+            title={state.message}
+          />
+        )}
         <Field
           orientation="vertical"
           label="Username"
@@ -52,12 +65,12 @@ export const InformationForm = (props: InformationFormProps) => {
             defaultValue={defaultJobTitle}
           />
         </Field>
-        {state?.message && <Alert status="success" title={state.message} />}
         <Button
           type="submit"
           size="md"
           variant="solid"
           className="information-button"
+          aria-label="hit the button to submit the username and job title"
         >
           Submit
         </Button>

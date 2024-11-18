@@ -58,8 +58,16 @@ const page = async (props: InformationPageProps) => {
   const { count } = characters.info;
   return (
     <section>
-      <Heading as="h1" size="4xl" className="information-heading ml-5 py-10">
-        Welcome to the family of Rick and Morty
+      <Heading as="h1" size="4xl" className="information-heading ml-5 pt-5">
+        Welcome to the gallery of Rick and Morty
+      </Heading>
+      <Heading
+        id="page-count-description"
+        as="h2"
+        className="information-sub-heading ml-5 py-5"
+        tabIndex={0}
+      >
+        You are viewing page {currentPage}
       </Heading>
       <InformationGrid charList={charList} />
       <Pagination count={count} pageSize={20} />

@@ -7,7 +7,12 @@ export function NavLinks() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex-center nav">
+    <nav
+      className="flex-center nav"
+      role="navigation"
+      aria-label="Main"
+      autoFocus
+    >
       <Link
         href="/information-page"
         className={`nav-item ${

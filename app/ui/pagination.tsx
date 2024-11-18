@@ -36,6 +36,8 @@ export const Pagination = (props: PaginationProps) => {
         onPageChange={(e) => {
           const newPageURL = createPageURL(e.page);
           router.push(newPageURL);
+          // always redirect the focus back to page count for A11y
+          document.getElementById("page-count-description")?.focus();
         }}
         siblingCount={2}
         page={currentPage}

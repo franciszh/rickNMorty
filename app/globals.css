@@ -30,7 +30,7 @@ body {
     @apply flex items-center justify-center;
   }
   .information-container {
-    @apply min-w-[300px] max-w-[500px] w-full mt-[2%];
+    @apply min-w-[300px] max-w-[500px] w-full my-[2%];
   }
   .input-container {
     @apply p-4 bg-[var(--pink)] shadow relative z-[2];
@@ -43,6 +43,9 @@ body {
   }
   .information-heading {
     @apply text-[var(--brown)] text-4xl;
+  }
+  .information-sub-heading {
+    @apply text-[var(--brown)] text-3xl;
   }
   .information-image-container {
     @apply relative mb-[-40px] z-[1];

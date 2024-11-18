@@ -29,7 +29,7 @@ export const InformationBox = (props: InformationBoxProps) => {
         <Box width="300px" borderWidth="1px">
           <Image
             src={image}
-            alt={name}
+            alt={`${name}'s character image`}
             width={300}
             height={300}
             priority={true}

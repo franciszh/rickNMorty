@@ -1,4 +1,6 @@
 "use client";
+
+import { useRef, useEffect } from "react";
 import {
   Box,
   HStack,
@@ -28,29 +30,101 @@ interface InformationModalProps {
 }
 
 export const InformationModal = (props: InformationModalProps) => {
+  const { name, species, gender, image, status, type, location, origin, id } =
+    props;
+  const { name: locationName } = location;
+  const { name: originName } = origin;
+
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const characterId = searchParams.get("charId");
 
   const createPageURL = () => {
     const params = new URLSearchParams(searchParams);
     params.delete("charId");
     return `${pathname}?${params.toString()}`;
   };
+  const modalRef = useRef<HTMLDivElement | null>(null);
+  const previousFocusRef = useRef<HTMLAnchorElement | null>(null);
 
-  if (!characterId) {
-    return null;
-  }
+  // refocus on the source when the modal is dismissed
+  useEffect(() => {
+    if (!previousFocusRef?.current) {
+      previousFocusRef.current = document.activeElement as HTMLAnchorElement;
+    }
+    return () => {
+      if (previousFocusRef.current) {
+        previousFocusRef.current.focus();
+      }
+    };
+  }, []);
 
-  const { name, species, gender, image, status, type, location, origin } =
-    props;
-  const { name: locationName } = location;
-  const { name: originName } = origin;
+  // focus on the modal when it pops up
+  useEffect(() => {
+    if (previousFocusRef?.current && modalRef?.current) {
+      modalRef.current.focus();
+    }
+  }, [id]);
+
+  // lock the focus in the modal
+  useEffect(() => {
+    if (modalRef.current) {
+      const modalElement = modalRef.current;
+      //add any focusable HTML element you want to include to this string
+      const focusableElements = modalElement.parentElement!.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      const firstElement = focusableElements[0] as HTMLInputElement;
+      const lastElement = focusableElements[
+        focusableElements.length - 1
+      ] as HTMLInputElement;
+
+      const handleTabKeyPress = (event: {
+        key: string;
+        shiftKey: unknown;
+        preventDefault: () => void;
+      }) => {
+        if (event.key === "Tab") {
+          if (event.shiftKey && document.activeElement === firstElement) {
+            event.preventDefault();
+            lastElement.focus();
+          } else if (
+            !event.shiftKey &&
+            document.activeElement === lastElement
+          ) {
+            event.preventDefault();
+            firstElement.focus();
+          }
+        }
+      };
+
+      const handleEscapeKeyPress = (event: { key: string }) => {
+        if (event.key === "Escape") {
+          router.push(createPageURL());
+        }
+      };
+
+      modalElement.addEventListener("keydown", handleTabKeyPress);
+      modalElement.addEventListener("keydown", handleEscapeKeyPress);
+
+      return () => {
+        modalElement.removeEventListener("keydown", handleTabKeyPress);
+        modalElement.removeEventListener("keydown", handleEscapeKeyPress);
+      };
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   return (
     <div className="information-modal-overlay">
-      <div className="information-modal-container">
+      <div
+        className="information-modal-container"
+        role="dialog"
+        aria-modal="true"
+        aria-label={`Information of ${name}`}
+        tabIndex={0}
+        ref={modalRef}
+      >
         <div className="text-center">
           <Heading
             as="h1"
@@ -109,6 +183,7 @@ export const InformationModal = (props: InformationModalProps) => {
             size="md"
             variant="solid"
             className="information-modal-button"
+            aria-label="dismiss the modal"
             onClick={() => router.push(createPageURL())}
           >
             Close
