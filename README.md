@@ -5,6 +5,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 It is deployed to Vercel, you may access it through https://rick-n-morty-three.vercel.app/
 
 ## E2E test
+I believe well maintained E2E tests are the best document to kick start, they will give you an overview about the implemented features.  
 
 ```bash
 npm run e2e
@@ -15,6 +16,7 @@ There are four playwrights files in tests folder, including the tests for
 - The information page, tests contain general use cases and A11y use cases
 - The username and job update form aka the edit profile page
 
+All the test cases are tested on **chromium**, **firefox** and **webkit**.
 
 ## Technical rundown for each page
 
@@ -37,7 +39,7 @@ There are four playwrights files in tests folder, including the tests for
 3. The profle edit page
   - Very similar to the signup form
   - The previously filled username and job title are decrypted and displayed in the form
-  - Update them will refresh the session with the new encrypted information
+  - Update them will refresh the session with the new encrypted information, an A11y friendly alert message will pop up when it succeeds
   - Remove either of the username and job title then submit the form will result in the removal of session, which navigates user to the signup form
 ![image](https://github.com/user-attachments/assets/02cc4f98-0a04-4745-a705-2b3b5fb07556)
   
