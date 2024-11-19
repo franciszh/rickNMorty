@@ -21,6 +21,23 @@ test("sign up page should navigate user to the information page when username an
   );
 });
 
+test("submit button is disabled and text changes to Submitting when form is submitting", async ({
+  page,
+}) => {
+  await page.goto(baseURL);
+  await page.getByPlaceholder("Enter your username").fill("Francis");
+  await page.getByPlaceholder("Enter your job title").fill("Software");
+  await page
+    .getByLabel("hit the button to submit the username and job title")
+    .click();
+  await expect(
+    page.getByLabel("hit the button to submit the username and job title")
+  ).toBeDisabled();
+  await expect(
+    page.getByLabel("hit the button to submit the username and job title")
+  ).toContainText("Submitting");
+});
+
 test("sign up page should make input fields as invalid when nothing is filled", async ({
   page,
 }) => {

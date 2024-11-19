@@ -16,6 +16,22 @@ test("the previously filled username and job title are visiable", async ({
   );
 });
 
+test("submit button is disabled and text changes to Submitting when form is submitting", async ({
+  page,
+}) => {
+  await page.getByPlaceholder("Enter your username").fill("Francis Zhao");
+  await page.getByPlaceholder("Enter your job title").fill("Software Engineer");
+  await page
+    .getByLabel("hit the button to submit the username and job title")
+    .click();
+  await expect(
+    page.getByLabel("hit the button to submit the username and job title")
+  ).toBeDisabled();
+  await expect(
+    page.getByLabel("hit the button to submit the username and job title")
+  ).toContainText("Submitting");
+});
+
 test("the username and job title are updated with success message", async ({
   page,
 }) => {

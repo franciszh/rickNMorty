@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { loading } from "./base64Images";
 
 interface InformationModalProps {
   name: string;
@@ -136,7 +137,14 @@ export const InformationModal = (props: InformationModalProps) => {
         </div>
         <Center>
           <Box width="100%">
-            <Image src={image} alt={name} width={400} height={400} priority />
+            <Image
+              src={image}
+              alt={name}
+              width={400}
+              height={400}
+              priority
+              placeholder={loading}
+            />
             <Box backgroundColor="#e4a788" p="4" spaceY="2">
               <HStack gap="2">
                 <Text>Gender:</Text>
