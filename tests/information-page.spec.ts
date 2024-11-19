@@ -115,6 +115,10 @@ test.describe("general use cases", () => {
 });
 
 test.describe("A11y use cases", () => {
+  test("the nav bar is focused while landing at the page", async ({ page }) => {
+    await expect(page.getByLabel("site navigation")).toBeFocused();
+  });
+
   test("user can use Tab to traverse the information tiles", async ({
     page,
   }) => {
@@ -132,5 +136,49 @@ test.describe("A11y use cases", () => {
       .getByRole("link", { name: "Rick Sanchez's character" })
       .press("Enter");
     await expect(page.getByRole("dialog")).toBeVisible();
+  });
+
+  test("user can use Escape to dismiss modal", async ({ page }) => {
+    await page
+      .getByRole("link", { name: "Rick Sanchez's character" })
+      .press("Enter");
+    await expect(page.getByRole("dialog")).toBeVisible();
+    await page.getByRole("dialog").press("Escape");
+    await expect(page.getByRole("dialog")).not.toBeVisible();
+  });
+
+  test("focus does not escape the modal", async ({ page }) => {
+    await page
+      .getByRole("link", { name: "Rick Sanchez's character" })
+      .press("Enter");
+    await expect(page.getByRole("dialog")).toBeVisible();
+    await page.getByRole("dialog").press("Tab");
+    await page.getByLabel("dismiss the modal").press("Tab");
+    await page.getByRole("dialog").press("Tab");
+    await page.getByLabel("dismiss the modal").press("Tab");
+    await expect(page.getByRole("dialog")).toBeFocused();
+  });
+
+  test("focus goes back to the original tile when the modal is dismissed", async ({
+    page,
+  }) => {
+    await page
+      .getByRole("link", { name: "Rick Sanchez's character" })
+      .press("Enter");
+    await expect(page.getByRole("dialog")).toBeVisible();
+    await page.getByRole("dialog").press("Tab");
+    await page.getByLabel("dismiss the modal").press("Enter");
+    await expect(
+      page.getByRole("link", { name: "Rick Sanchez's character" })
+    ).toBeFocused();
+  });
+
+  test("focus goes to the page count message when new page is accessed", async ({
+    page,
+  }) => {
+    await page.getByLabel("page 3").click();
+    await expect(
+      page.getByRole("heading", { name: "You are viewing page 3" })
+    ).toBeFocused();
   });
 });

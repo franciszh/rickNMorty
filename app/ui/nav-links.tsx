@@ -10,7 +10,7 @@ export function NavLinks() {
     <nav
       className="flex-center nav"
       role="navigation"
-      aria-label="Main"
+      aria-label="site navigation"
       autoFocus
     >
       <Link
