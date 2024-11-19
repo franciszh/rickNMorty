@@ -10,8 +10,12 @@ test("sign up page should navigate user to the information page when username an
   await page
     .getByLabel("hit the button to submit the username and job title")
     .click();
-  await expect(page.getByLabel("Main")).toContainText("Edit Profile");
-  await expect(page.getByLabel("Main")).toContainText("Information Page");
+  await expect(page.getByLabel("site navigation")).toContainText(
+    "Edit Profile"
+  );
+  await expect(page.getByLabel("site navigation")).toContainText(
+    "Information Page"
+  );
   await expect(page.locator("h1")).toContainText(
     "Welcome to the gallery of Rick and Morty"
   );

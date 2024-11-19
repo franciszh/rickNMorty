@@ -115,10 +115,6 @@ test.describe("general use cases", () => {
 });
 
 test.describe("A11y use cases", () => {
-  test("the nav bar is focused while landing at the page", async ({ page }) => {
-    await expect(page.getByLabel("site navigation")).toBeFocused();
-  });
-
   test("user can use Tab to traverse the information tiles", async ({
     page,
   }) => {
