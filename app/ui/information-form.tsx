@@ -75,6 +75,7 @@ export const InformationForm = (props: InformationFormProps) => {
           variant="solid"
           className="information-button"
           aria-label="hit the button to submit the username and job title"
+          tabIndex={0}
         >
           Submit
         </Button>

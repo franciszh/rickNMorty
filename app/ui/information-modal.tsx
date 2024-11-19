@@ -185,6 +185,7 @@ export const InformationModal = (props: InformationModalProps) => {
             className="information-modal-button"
             aria-label="dismiss the modal"
             onClick={() => router.push(createPageURL())}
+            tabIndex={0}
           >
             Close
           </Button>

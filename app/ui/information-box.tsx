@@ -25,7 +25,7 @@ export const InformationBox = (props: InformationBoxProps) => {
   };
   return (
     <Center width="100%">
-      <Link href={createPageURL(id)}>
+      <Link href={createPageURL(id)} tabIndex={0}>
         <Box width="300px" borderWidth="1px">
           <Image
             src={image}

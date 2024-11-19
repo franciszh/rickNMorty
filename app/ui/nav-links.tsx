@@ -15,6 +15,7 @@ export function NavLinks() {
     >
       <Link
         href="/information-page"
+        tabIndex={0}
         className={`nav-item ${
           pathname === "/information-page" ? "active" : ""
         }`}
@@ -23,6 +24,7 @@ export function NavLinks() {
       </Link>
       <Link
         href="/edit-profile"
+        tabIndex={0}
         className={`nav-item ${pathname === "/edit-profile" ? "active" : ""}`}
       >
         Edit Profile
