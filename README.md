@@ -1,36 +1,44 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## Deployment
 
-First, run the development server:
+It is deployed to Vercel, you may access it through https://rick-n-morty-three.vercel.app/
+
+## E2E test
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run e2e
 ```
+There are four playwrights files in tests folder, including the tests for
+- The blocking flow (when username and job title are not filled)
+- The username and job title form aka the sign up form
+- The information page, tests contain general use cases and A11y use cases
+- The username and job update form aka the edit profile page
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technical rundown for each page
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. The blocking page (signup form)
+  - The username and job title are encrypted and stored in session in the format of JWS JSON Web Tokens
+  - The access control is implemented in the level of middleware
+  - The form leverages React 18 useActionState hook
+  - Both client side and server client validations are enforced even though there is not too much to validate
+    
+![image](https://github.com/user-attachments/assets/0abb1cbb-89f9-44a7-8600-13a3db43e815)
 
-## Learn More
+2. The information page and modal
+  - The most complicated page with the most A11y optimizations, e.g. the page viewing heading is focused when page is switched, the focus locks in the modal and the focus will be restored when modal is dismissed
+  - The simple modal is handcrafted by myself as there is an existing bug in Next.js 15 with Chakra Modal
+  - Server component rendering takes top priority, as a result, both page and modal can be accessed through URLs
+  - @apollo/experimental-nextjs-app-support is required with Apollo client to fetch the data on server end
+    
+![image](https://github.com/user-attachments/assets/7180bbc0-8488-4b0b-973a-356c0ef0ceab)
 
-To learn more about Next.js, take a look at the following resources:
+3. The profle edit page
+  - Very similar to the signup form
+  - The previously filled username and job title are decrypted and displayed in the form
+  - Update them will refresh the session with the new encrypted information
+  - Remove either of the username and job title then submit the form will result in the removal of session, which navigates user to the signup form
+![image](https://github.com/user-attachments/assets/02cc4f98-0a04-4745-a705-2b3b5fb07556)
+  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
