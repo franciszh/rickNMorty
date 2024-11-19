@@ -19,7 +19,13 @@ const page = async () => {
     <div className="flex-center">
       <section className="information-container">
         <div className="flex-center information-image-container">
-          <Image src={rickHead} alt="rick headshot" height={300} width={300} />
+          <Image
+            src={rickHead}
+            alt="rick headshot"
+            height={300}
+            width={300}
+            priority
+          />
         </div>
         <div className="input-container">
           <Heading

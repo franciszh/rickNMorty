@@ -19,6 +19,7 @@ const page = () => {
             alt="morty headshot"
             height={300}
             width={300}
+            priority
           />
         </div>
         <div className="input-container">

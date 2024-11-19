@@ -136,7 +136,7 @@ export const InformationModal = (props: InformationModalProps) => {
         </div>
         <Center>
           <Box width="100%">
-            <Image src={image} alt={name} width={400} height={400} />
+            <Image src={image} alt={name} width={400} height={400} priority />
             <Box backgroundColor="#e4a788" p="4" spaceY="2">
               <HStack gap="2">
                 <Text>Gender:</Text>

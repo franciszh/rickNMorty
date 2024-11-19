@@ -2,10 +2,11 @@
 
 import { useActionState } from "react";
 import { Field } from "@/components/ui/field";
-import { Input, Stack, Button } from "@chakra-ui/react";
+import { Input, Stack } from "@chakra-ui/react";
 import { signup, uplete } from "@/app/actions/auth";
 import { Alert } from "@/components/ui/alert";
 import { FormState } from "@/app/lib/definitions";
+import { Button } from "@/components/ui/button";
 
 interface InformationFormProps {
   defaultUserName?: string;
@@ -16,7 +17,7 @@ export const InformationForm = (props: InformationFormProps) => {
   const { defaultJobTitle, defaultUserName } = props;
   const isToEditInformationForm = !!(defaultJobTitle && defaultUserName);
   const formServerAction = isToEditInformationForm ? uplete : signup;
-  const [state, action] = useActionState<FormState, FormData>(
+  const [state, action, isPending] = useActionState<FormState, FormData>(
     formServerAction,
     {}
   );
@@ -51,6 +52,7 @@ export const InformationForm = (props: InformationFormProps) => {
             flex={1}
             className="input-field"
             defaultValue={defaultUserName}
+            colorPalette="teal"
           />
         </Field>
         <Field
@@ -67,6 +69,7 @@ export const InformationForm = (props: InformationFormProps) => {
             flex={1}
             className="input-field"
             defaultValue={defaultJobTitle}
+            colorPalette="teal"
           />
         </Field>
         <Button
@@ -76,6 +79,8 @@ export const InformationForm = (props: InformationFormProps) => {
           className="information-button"
           aria-label="hit the button to submit the username and job title"
           tabIndex={0}
+          loading={isPending}
+          loadingText="Submitting"
         >
           Submit
         </Button>
