@@ -8,8 +8,8 @@ export type SessionPayload = {
 
 // A very simple zod schema nullish validation
 export const SignupFormSchema = z.object({
-  userName: z.string({ required_error: "User Name is required" }),
-  jobTitle: z.string({ required_error: "Job Title is required" }),
+  userName: z.string({ required_error: "Name is required" }),
+  jobTitle: z.string({ required_error: "Universe is required" }),
 });
 
 export const UpleteFormSchema = z.object({

@@ -69,7 +69,7 @@ export async function deleteSession() {
   cookieStore.delete("session");
 }
 
-// read the payload in order ot get the user name and job title
+// read the payload in order ot get the name and universe
 export async function getPayload() {
   const session = (await cookies()).get("session")?.value;
   if (!session) {

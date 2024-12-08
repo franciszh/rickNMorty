@@ -40,7 +40,7 @@ export const InformationForm = (props: InformationFormProps) => {
         )}
         <Field
           orientation="vertical"
-          label="Username"
+          label="Name"
           className="input-wrapper"
           required={!isToEditInformationForm}
           invalid={!!state?.errors?.userName}
@@ -48,7 +48,7 @@ export const InformationForm = (props: InformationFormProps) => {
         >
           <Input
             name="userName"
-            placeholder="Enter your username"
+            placeholder="Enter your name"
             flex={1}
             className="input-field"
             defaultValue={defaultUserName}
@@ -57,7 +57,7 @@ export const InformationForm = (props: InformationFormProps) => {
         </Field>
         <Field
           orientation="vertical"
-          label="Job Title"
+          label="Universe"
           className="input-wrapper"
           required={!isToEditInformationForm}
           invalid={!!state?.errors?.jobTitle}
@@ -65,7 +65,7 @@ export const InformationForm = (props: InformationFormProps) => {
         >
           <Input
             name="jobTitle"
-            placeholder="Enter your job title"
+            placeholder="Enter your universe"
             flex={1}
             className="input-field"
             defaultValue={defaultJobTitle}
@@ -77,7 +77,7 @@ export const InformationForm = (props: InformationFormProps) => {
           size="md"
           variant="solid"
           className="information-button"
-          aria-label="hit the button to submit the username and job title"
+          aria-label="hit the button to submit your name and universe"
           tabIndex={0}
           loading={isPending}
           loadingText="Submitting"
